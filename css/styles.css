@@ -1,0 +1,11 @@
+body {
+font-family: "Lato", sans-serif;
+background-color: #a0a0a0;
+}
+th, td{
+    text-align: center;
+}
+table {
+    width: 100%;    
+    background-color: #f1f1c1;
+}
