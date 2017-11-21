@@ -12,7 +12,7 @@
         <script src="js/main.js"></script>
         <link href="css/styles.css" rel="stylesheet">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     </head>
     <body onload="display_on_load()" id="111">
     <header class="w3-container w3-teal">
@@ -33,9 +33,9 @@
                             </div>
                             <ul class="nav navbar-nav">
                             <li><a  data-toggle="collapse" data-target="#table-colp" href="#" onclick="display_on_load()">Display Details</a></li>
-                                <li><a href="#" data-toggle="collapse" data-target="#form-colp" onclick="insertRecord()">Insert</a></li>
-                                <li><a href="#" onclick="deleteRecord()">Delete</a></li>
-                                <li><a href="#" onclick="editRecord()">Edit</a></li>
+                                <li><a href="#" data-toggle="collapse" data-target="#form-colp" onclick="insert()">Insert</a></li>
+                                <li><a href="#" onclick="delete_record()">Delete</a></li>
+                                <li><a href="#" onclick="edit_record()">Edit</a></li>
                        
                             </ul>                     
                         </div>
@@ -56,10 +56,6 @@
                                 <input type="number" class="form-control" required>
                             </div>
                             <div class="form-group">
-                                <label>Enter Batch Batch of Student : </label>
-                                <input type="number" class="form-control" required>
-                            </div>
-                            <div class="form-group">
                                 <label>Enter Class of Student : </label>
                                 <input type="text" class="form-control" required>
                             </div>
@@ -76,7 +72,6 @@
                                 <tr>
                                     <th>Student Name</th>
                                     <th>Roll Number</th>
-                                    <th>Batch</th>
                                     <th>Class</th>
                                     <th> Delete        
                                             <a class="btn btn-danger" href="#">

@@ -1,38 +1,57 @@
 let student_array = [
     {
-        "nameOfStudent" : "Divyansh Verma",
-        "rollnoOfStudent" : "1510991197",
-        "Batch" : "2019",
+        "name" : "Divyansh Verma",
+        "rollno" : "1510991197",
         "Class" : "CSE UCA 2"
     },
     {
-        "nameOfStudent" : "Divyansh Rana",
-        "rollnoOfStudent" : "1510991196",
-        "Batch" : "2019",
+        "name" : "Divyansh Rana",
+        "rollno" : "1510991196",
         "Class" : "CSE 5C"
     },
     {
-        "nameOfStudent" : "Divyansh lath",
-        "rollnoOfStudent" : "1510991195",
-        "Batch" : "2019",
+        "name" : "Divyansh lath",
+        "rollno" : "1510991195",
         "Class" : "CSE 5C"
     }
 ];
 
-let replaceCall = true;
-let insertcall = false;
-
-function insertRecord()
+let replace_counter = true;
+let insert_counter = false;
+function delete_record()
+{
+    $("#form-colp").collapse('hide');
+    $("#table-colp").collapse('show');
+    swal("Roll Number or Name of Student ", {
+        content: "input",
+      })
+      .then((value) => {
+          if(value)
+          {
+            student_array.forEach((element, index) => {
+                if(element.rollno === value) {
+                    del_record(index);
+                }
+                else if(element.name === value) {
+                    //console.log('in else if');
+                    del_record(index);
+                }
+            });
+        }
+        
+    });
+}
+function insert()
 { 
     $("#table-colp").collapse('hide');
-    insertcall = true;
+    insert_counter = true;
     let i = document.getElementsByClassName("form-control");   
     i[0].value = "";
     i[1].value = "";
     i[2].value = "";
     i[3].value = "";
 }
-function dRecord(d)
+function del_record(d)
 {
     let el = document.getElementsByTagName("tbody");
     el[0].parentElement.removeChild(el[0]);
@@ -42,71 +61,46 @@ function dRecord(d)
 let ins;
 
 
-function iRecord()
+function insert_record()
 {
     $("#form-colp").collapse('hide');
     let studentObj ={
-        "nameOfStudent" : "",
-        "rollnoOfStudent" : "",
-        "Batch" : "",
+        "name" : "",
+        "rollno" : "",
         "Class" : ""
     }
     let i = document.getElementsByClassName("form-control");   
-    studentObj.nameOfStudent = i[0].value;
+    studentObj.name = i[0].value;
     i[0].value = "";
-    studentObj.rollnoOfStudent = i[1].value;
+    studentObj.rollno = i[1].value;
     i[1].value = "";
-    studentObj.Batch = i[2].value;
-    i[2].value = "";
     studentObj.Class = i[3].value;
     i[3].value = "";
     student_array.push(studentObj);
 }
-function deleteRecord()
+
+function edit_record()
 {
     $("#form-colp").collapse('hide');
     $("#table-colp").collapse('show');
-    swal("Enter Roll Number or Name of Student ", {
+    swal("Roll Number or Name of Student ", {
         content: "input",
       })
       .then((value) => {
           if(value)
           {
             student_array.forEach((element, index) => {
-                if(element.rollnoOfStudent === value) {
-                    dRecord(index);
+                if(element.rollno === value) {
+                    editrecord(index);
                 }
-                else if(element.nameOfStudent === value) {
-                    //console.log('in else if');
-                    dRecord(index);
-                }
-            });
-        }
-        
-    });
-}
-function editRecord()
-{
-    $("#form-colp").collapse('hide');
-    $("#table-colp").collapse('show');
-    swal("Enter Roll Number or Name of Student ", {
-        content: "input",
-      })
-      .then((value) => {
-          if(value)
-          {
-            student_array.forEach((element, index) => {
-                if(element.rollnoOfStudent === value) {
-                    eRecord(index);
-                }
-                else if(element.nameOfStudent === value) {
-                    eRecord(index);
+                else if(element.name === value) {
+                    editrecord(index);
                 }
             });
         }
       });
 }
-function eRecord(e)
+function editrecord(e)
 {
     $("#table-colp").collapse('hide');
     let el = document.getElementsByTagName("tbody");
@@ -114,21 +108,19 @@ function eRecord(e)
     $("#form-colp").collapse('show');
     
     let i = document.getElementsByClassName("form-control");
-    i[0].value = student_array[e].nameOfStudent; 
-    i[1].value = student_array[e].rollnoOfStudent;
-    i[2].value = student_array[e].Batch;
-    i[3].value = student_array[e].Class;
-    insertcall = false;
+    i[0].value = student_array[e].name; 
+    i[1].value = student_array[e].rollno;
+    i[2].value = student_array[e].Class;
+    insert_counter = false;
     ins =e;
 }
-function rRecord()
+function readrecord()
 {
     $("#form-colp").collapse('hide');
     let i = document.getElementsByClassName("form-control");
-    student_array[ins].nameOfStudent = i[0].value; 
-    student_array[ins].rollnoOfStudent = i[1].value;
-    student_array[ins].Batch = i[2].value;
-    student_array[ins].Class = i[3].value;
+    student_array[ins].name = i[0].value; 
+    student_array[ins].rollno = i[1].value;
+    student_array[ins].Class = i[2].value;
 }
 
 function display_on_load()
@@ -143,16 +135,12 @@ function display_on_load()
             let trTag = document.createElement("tr");
 
             let tdTag = document.createElement("td");
-            tdTag.innerHTML = student_array[j].nameOfStudent;
+            tdTag.innerHTML = student_array[j].name;
             trTag.appendChild(tdTag);
             
             let td2 = document.createElement("td");
-            td2.innerHTML = student_array[j].rollnoOfStudent;
+            td2.innerHTML = student_array[j].rollno;
             trTag.appendChild(td2);
-            
-            let td3 = document.createElement("td");
-            td3.innerHTML = student_array[j].Batch;
-            trTag.appendChild(td3);
             
             let td4 = document.createElement("td");
             td4.innerHTML = student_array[j].Class;
@@ -164,14 +152,14 @@ function display_on_load()
             aTag1.className = "btn btn-default";
             iTag1.className = "fa fa-pencil-square-o";
             aTag1.appendChild(iTag1);
-            aTag1.onclick = function() { eRecord(j); };
+            aTag1.onclick = function() { editrecord(j); };
             td5.appendChild(aTag1);
             let aTag2 = document.createElement("a");
             let iTag2 = document.createElement("i");
             aTag2.className = "btn btn-danger";
             iTag2.className = "fa fa-trash-o";
             aTag2.appendChild(iTag2);
-            aTag2.onclick = function() { dRecord(j); };
+            aTag2.onclick = function() { del_record(j); };
             td5.appendChild(aTag2);
             trTag.appendChild(td5);
             
@@ -189,12 +177,12 @@ function funcall()
         let el = document.getElementsByTagName("tbody");
         el[0].parentElement.removeChild(el[0]);
     }
-    if(insertcall == true)
+    if(insert_counter == true)
     {
-        iRecord();
+        insert_record();
     }
-    else if(replaceCall == true)
+    else if(replace_counter == true)
     {
-        rRecord();
+        readrecord();
     }
 }
