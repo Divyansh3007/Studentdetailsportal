@@ -49,18 +49,7 @@ function insert()
     i[0].value = "";
     i[1].value = "";
     i[2].value = "";
-    i[3].value = "";
 }
-function del_record(d)
-{
-    let el = document.getElementsByTagName("tbody");
-    el[0].parentElement.removeChild(el[0]);
-    student_array.splice(d,1);
-    display_on_load();
-}
-let ins;
-
-
 function insert_record()
 {
     $("#form-colp").collapse('hide');
@@ -75,10 +64,32 @@ function insert_record()
     studentObj.rollno = i[1].value;
     i[1].value = "";
     studentObj.Class = i[3].value;
-    i[3].value = "";
+    i[2].value = "";
     student_array.push(studentObj);
 }
+function del_record(d)
+{
+    let el = document.getElementsByTagName("tbody");
+    el[0].parentElement.removeChild(el[0]);
+    student_array.splice(d,1);
+    display_on_load();
+}
+let ins;
 
+function editrecord(e)
+{
+    $("#table-colp").collapse('hide');
+    let el = document.getElementsByTagName("tbody");
+    
+    $("#form-colp").collapse('show');
+    
+    let i = document.getElementsByClassName("form-control");
+    i[0].value = student_array[e].name; 
+    i[1].value = student_array[e].rollno;
+    i[2].value = student_array[e].Class;
+    insert_counter = false;
+    ins =e;
+}
 function edit_record()
 {
     $("#form-colp").collapse('hide');
@@ -100,20 +111,7 @@ function edit_record()
         }
       });
 }
-function editrecord(e)
-{
-    $("#table-colp").collapse('hide');
-    let el = document.getElementsByTagName("tbody");
-    
-    $("#form-colp").collapse('show');
-    
-    let i = document.getElementsByClassName("form-control");
-    i[0].value = student_array[e].name; 
-    i[1].value = student_array[e].rollno;
-    i[2].value = student_array[e].Class;
-    insert_counter = false;
-    ins =e;
-}
+
 function readrecord()
 {
     $("#form-colp").collapse('hide');
@@ -122,7 +120,23 @@ function readrecord()
     student_array[ins].rollno = i[1].value;
     student_array[ins].Class = i[2].value;
 }
-
+function funcall()
+{
+    
+    if(document.getElementsByTagName("tbody").length) 
+    {
+        let el = document.getElementsByTagName("tbody");
+        el[0].parentElement.removeChild(el[0]);
+    }
+    if(insert_counter == true)
+    {
+        insert_record();
+    }
+    else if(replace_counter == true)
+    {
+        readrecord();
+    }
+}
 function display_on_load()
 {   
     $("#form-colp").collapse('hide');
@@ -169,20 +183,3 @@ function display_on_load()
     }
 }
 
-function funcall()
-{
-    
-    if(document.getElementsByTagName("tbody").length) 
-    {
-        let el = document.getElementsByTagName("tbody");
-        el[0].parentElement.removeChild(el[0]);
-    }
-    if(insert_counter == true)
-    {
-        insert_record();
-    }
-    else if(replace_counter == true)
-    {
-        readrecord();
-    }
-}
